@@ -96,7 +96,7 @@ def publicsearch():
     connection = getCursor()
     connection.execute("SELECT * FROM books where booktitle LIKE %s;",(searchterm,))
     bookList = connection.fetchall()
-    return render_template("route.html", bookList = bookList)
+    return render_template("booklist.html", bookList = bookList)
 
 @app.route("/staff/search", methods=["POST"])
 def staffsearch():
