@@ -94,7 +94,7 @@ def publicsearch():
     searchterm=request.form.get('search')
     searchterm="%" + searchterm +"%"
     connection = getCursor()
-    connection.execute(sql="SELECT * FROM books where booktitle LIKE %s;",(searchterm,))
+    connection.execute("SELECT * FROM books where booktitle LIKE %s;",(searchterm,))
     bookList = connection.fetchall()
     return render_template("route.html", bookList = bookList)
 
