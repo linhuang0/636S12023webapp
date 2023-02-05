@@ -78,3 +78,49 @@ def currentloans():
     connection.execute(sql)
     loanList = connection.fetchall()
     return render_template("currentloans.html", loanlist = loanList)
+
+# add public access /route
+@app.route("/route")
+def publicroute():
+    return render_template("route.html")
+
+# add staff access /route
+@app.route("/staff")
+def staffrote():
+    return render_template("staffroute.html")
+   
+@app.route("/route/search", methods=["POST"])
+def publicsearch():
+    return render_template("route")
+
+@app.route("/staff/search", methods=["POST"])
+def staffsearch():
+    return render_template("staffroute")
+
+@app.route("/staff/addborrower", methods=["POST"])
+def addborrower():
+    return redirect("/staffroute")
+
+@app.route("/staff/editborrower", methods=["POST"])
+def addborrower():
+    return redirect("/staffroute")
+
+@app.route("/staff/issuebooks", methods=["POST"])
+def issuebooks():
+    return redirect("/staffroute")
+
+@app.route("/staff/returnbooks", methods=["POST"])
+def returnbooks():
+    return redirect("/staffroute")
+
+@app.route("/staff/listoverduebooks")
+def listoverduebooks():
+    return redirect("/staffroute/listoverduebooks.html")
+
+@app.route("/staff/listloansumary")
+def listloansumary():
+    return redirect("/staffroute/listloansumary.html")
+
+@app.route("/staff/listborrowersummay")
+def listborrowersummay():
+    return redirect("/staffroute/listborrowersummay.html")
