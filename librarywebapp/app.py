@@ -89,9 +89,14 @@ def publicroute():
 def staffrote():
     return render_template("staffroute.html")
    
-@app.route("/route/search", methods=["POST"])
+@app.route("/searchbooks", methods=["POST"])
 def publicsearch():
-    return render_template("route")
+    searchterm=request.form.get('search')
+    searchterm="%" + searchterm +"%"
+    connection = getCursor()
+    connection.execute(sql="SELECT * FROM books where booktitle LIKE %s;",(searchterm,))
+    bookList = connection.fetchall()
+    return render_template("route.html", bookList = bookList)
 
 @app.route("/staff/search", methods=["POST"])
 def staffsearch():
@@ -99,27 +104,27 @@ def staffsearch():
 
 @app.route("/staff/addborrower", methods=["POST"])
 def addborrower():
-    return redirect("/staffroute")
+    return redirect("/staff")
 
 @app.route("/staff/editborrower", methods=["POST"])
 def editborrower():
-    return redirect("/staffroute")
+    return redirect("/staff")
 
 @app.route("/staff/issuebooks", methods=["POST"])
 def issuebooks():
-    return redirect("/staffroute")
+    return redirect("/staff")
 
 @app.route("/staff/returnbooks", methods=["POST"])
 def returnbooks():
-    return redirect("/staffroute")
+    return redirect("/staff")
 
 @app.route("/staff/listoverduebooks")
 def listoverduebooks():
-    return redirect("/staffroute/listoverduebooks.html")
+    return redirect("/staff/listoverduebooks.html")
 
 @app.route("/staff/listloansumary")
 def listloansumary():
-    return redirect("/staffroute/listloansumary.html")
+    return redirect("/staff/listloansumary.html")
 
 @app.route("/staff/listborrowersummay")
 def listborrowersummay():

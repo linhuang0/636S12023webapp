@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Borrower List
+public route
 {% endblock %}
 {% block content %}
 <!--  Name:        LIN HUANG  -->
@@ -8,5 +8,12 @@ Borrower List
 <!-- code to display public route -->
 <br/>
 <h2>public route</h2>
+
+<div>
+    <form method ="POST" action="/searchbooks">
+        <input id="search" name="search" >
+        <input type="submit" value="Submit">
+    </form>
+</div>
 
 {% endblock %}
