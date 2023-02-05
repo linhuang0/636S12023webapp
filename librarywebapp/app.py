@@ -91,12 +91,12 @@ def staffrote():
    
 @app.route("/route/search", methods=["POST"])
 def publicsearch():
-    title=request.form.get('title')
+    title=request.form.get('catalogue')
     author=request.form.get('author')
     item =""
-    if title == None or title == "": 
-        item =   "author" 
-    else: item = "booktitle"
+    if title == "All catalogue" or "title": 
+        catalogue =   "booktitle" 
+    else: catalogue = "author"
     searchterm=request.form.get('search')
     searchterm="%" + searchterm +"%"
     connection = getCursor()
@@ -109,7 +109,7 @@ def publicsearch():
                         inner join borrowers br on l.borrowerid = br.borrowerid
             where %s LIKE %s
             order by br.familyname, br.firstname, l.loandate;"""
-    searchitem=(item,searchterm)
+    searchitem=(catalogue,searchterm)
     connection.execute(sql,searchitem)
     bookList = connection.fetchall()
     return render_template("booklist.html", booklist = bookList)
