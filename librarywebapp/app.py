@@ -93,8 +93,9 @@ def staffrote():
 def publicsearch():
     catalogue=request.form.get('catalogue')
     if catalogue == "title": 
-        catalogue =   "booktitle" 
-    else: catalogue = "author"
+        selectedcatalogue =   "booktitle" 
+    else: selectedcatalogue = "author"
+    selectedcatalogue="%" + selectedcatalogue +"%"
     searchterm=request.form.get('search')
     searchterm="%" + searchterm +"%"
     connection = getCursor()
@@ -107,7 +108,7 @@ def publicsearch():
                         inner join borrowers br on l.borrowerid = br.borrowerid
             where %s LIKE %s
             order by br.familyname, br.firstname, l.loandate;"""
-    searchitem=(catalogue,searchterm)
+    searchitem=(selectedcatalogue,searchterm)
     connection.execute(sql,searchitem)
     bookList = connection.fetchall()
     return render_template("booklist.html", booklist = bookList)
