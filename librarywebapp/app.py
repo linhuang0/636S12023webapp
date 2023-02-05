@@ -91,10 +91,8 @@ def staffrote():
    
 @app.route("/route/search", methods=["POST"])
 def publicsearch():
-    title=request.form.get('catalogue')
-    author=request.form.get('author')
-    item =""
-    if title == "All catalogue" or "title": 
+    catalogue=request.form.get('catalogue')
+    if catalogue == "All catalogue" or "title": 
         catalogue =   "booktitle" 
     else: catalogue = "author"
     searchterm=request.form.get('search')
