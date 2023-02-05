@@ -8,18 +8,15 @@ public route
 <!-- code to display public route -->
 <br/>
 <h2>public route</h2>
-
-<form method ="POST" action="/route/search"></form>
-    <div class="input-group mb-3">
+<form method ="POST" action="/route/search">
+    <div class="input-group mb-3"></div>
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="catalogue" name="catalogue">All catalogue</button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">title</a></li>
-            <li><a class="dropdown-item" href="#">author</a></li>
+          <li><a class="dropdown-item" href="#">author</a></li>
         </ul>
         <input  id="search" type="text" class="form-control" aria-label="Text input with dropdown button" name="search">
         <input type="submit" value="Submit">
     </div>
 </form>
-
-
 {% endblock %}
