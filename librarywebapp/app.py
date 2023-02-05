@@ -89,7 +89,7 @@ def publicroute():
 def staffrote():
     return render_template("staffroute.html")
    
-@app.route("/searchbooks", methods=["POST"])
+@app.route("/route/search", methods=["POST"])
 def publicsearch():
     searchterm=request.form.get('search')
     searchterm="%" + searchterm +"%"
