@@ -1,10 +1,15 @@
 {% extends "base.html" %}
+{% block title %}
+Book Lists
+{% endblock %}
 {% block content %}
-<!-- code in here to display a list of books-->
+<!--  Name:        LIN HUANG  -->
+<!--  Student ID:  1154938  -->
+<!-- code to display a list of books-->
+<br/>
 <h2>Book List</h2>
-<h3>A list of all books in our collection</h3>
 
-<table>
+<table class="table table-striped table-hover">
     <tr><th>Book ID</th><th>Title</th><th>Author</th><th>Type</th><th>Year of Publication</th><th>Description</th></tr>
     {% for book in booklist %}
         <tr>
