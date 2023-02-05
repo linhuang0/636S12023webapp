@@ -93,9 +93,8 @@ def staffrote():
 def publicsearch():
     catalogue=request.form.get('catalogue')
     if catalogue == "title": 
-        selectedcatalogue =   "booktitle" 
-    else: selectedcatalogue = "author"
-    selectedcatalogue="%" + selectedcatalogue +"%"
+        selectedcatalogue =   "b.booktitle" 
+    else: selectedcatalogue = "b.author"
     searchterm=request.form.get('search')
     searchterm="%" + searchterm +"%"
     connection = getCursor()

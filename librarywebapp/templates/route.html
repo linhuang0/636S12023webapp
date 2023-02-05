@@ -10,11 +10,11 @@ public route
 <h2>public route</h2>
 <form method ="POST" action="/route/search">
     <div class="input-group mb-3"></div>
-        <select name="catalogue" id="catalogue" required="required">
+        <select name="catalogue" id="catalogue" required="required"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
             <option selected>title</option>
             <option>author</option>
          </select>
-        <input  id="search" type="text" class="form-control" aria-label="Text input with dropdown button" name="search">
+        <input  id="search" type="text" class="form-control" aria-label="Text input with dropdown button" name="search" placeholder="Search books">
         <input type="submit" value="Submit">
     </div>
 </form>
