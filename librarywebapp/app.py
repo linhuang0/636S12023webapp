@@ -102,7 +102,7 @@ def addborrower():
     return redirect("/staffroute")
 
 @app.route("/staff/editborrower", methods=["POST"])
-def addborrower():
+def editborrower():
     return redirect("/staffroute")
 
 @app.route("/staff/issuebooks", methods=["POST"])
