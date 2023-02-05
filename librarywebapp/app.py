@@ -94,8 +94,8 @@ def publicsearch():
     title=request.form.get('title')
     author=request.form.get('author')
     item =""
-    if title == None: 
-        item = "author"
+    if title == None or title == "": 
+        item =   "author" 
     else: item = "booktitle"
     searchterm=request.form.get('search')
     searchterm="%" + searchterm +"%"
