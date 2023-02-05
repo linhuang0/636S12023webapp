@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Book Lists
+Book Search result  Lists
 {% endblock %}
 {% block content %}
 <!--  Name:        LIN HUANG  -->
@@ -13,17 +13,17 @@ Book Lists
    <tr><th>Book ID</th><th>Title</th><th>Author</th><th>Type</th><th>Year of Publication</th><th>Returned</th><th>loandate</th></tr>
     {% for book in booklist %}
         <tr>
-                <th>{{entry[7]}}</th>
-                <th>{{entry[8]}}</th>
-                <th>{{entry[9]}}</th>
-                <th>{{entry[10]}}</th>
-                <th>{{entry[11]}}</th>
-                {% if entry[6] == 0 %}
+                <th>{{book[7]}}</th>
+                <th>{{book[8]}}</th>
+                <th>{{book[9]}}</th>
+                <th>{{book[10]}}</th>
+                <th>{{book[11]}}</th>
+                {% if book[6] == 0 %}
                 <th>On Loan</th>
                 {% else %}
                 <th>Returned</th> 
                 {% endif %}
-                <th>{{entry[5]}}</th>
+                <th>{{book[5]}}</th>
         </tr>
     {% endfor %}
     <a class="btn btn-primary" href="{{ url_for('route') }}" role="button">Back</a>
