@@ -1,7 +1,21 @@
 {% extends "base.html" %}
+{% block title %}
+Borrower List
+{% endblock %}
 {% block content %}
-<!-- code in here to display a list of borrowers -->
-<!-- borrowerlist is the variable passed in containing list of loans -->
+<!--  Name:        LIN HUANG  -->
+<!--  Student ID:  1154938  -->
+<!-- code to display a list of borrowers -->
+<br/>
+<h2>Borrower List</h2>
 
-
+<table class="table table-striped table-hover">
+    <tr><th>Borrower ID</th><th>First Name</th><th>Family Name</th><th>Date of birth</th><th>House Number Name</th><th>Street</th><th>Town</th><th>City</th><th>Postal Code</th></tr>
+    {% for borrower in borrowerlist %}
+    <tr>{% for item in borrower %}
+        <td>{{item}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </table>
 {% endblock %}

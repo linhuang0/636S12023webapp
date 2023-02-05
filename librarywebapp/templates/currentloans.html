@@ -1,7 +1,42 @@
 {% extends "base.html" %}
+{% block title %}
+Current Loads
+{% endblock %}
 {% block content %}
-<!-- code in here to display a list of loans -->
-<!-- loanlist is the variable passed in containing list of loans -->
-
+<!--  Name:        LIN HUANG  -->
+<!--  Student ID:  1154938  -->
+<!--code to display list of loans -->
+<br/>
+<h2>Current Loans</h2>
+<table class="table table-striped table-hover">
+    <tr><th>Borrower Name</th><th>Loan Date</th><th>Status </th><th>Book Title</th><th>Type</th></tr>
+    {% set currentborrower = namespace(id=0) %}
+    {% for loan in loanlist %}
+        {% if loan[12] == "eBook" %}
+            {% set col = "green" %}
+        {% elif loan[12] == "Audio Book" %}
+            {% set col = "yellow" %}
+        {% else %}
+            {% set col = "white" %}
+        {% endif %}
+        <!-- the borrower name should be shown only once -->
+        <tr bgcolor="{{col}}">
+            {% if (currentborrower.id != loan[0])  %}
+              <th>{{loan[2]}}  {{loan[1]}}</th>
+              {% set currentborrower.id = loan[0] %}
+            {% else %} 
+              <th></th>
+            {% endif %}
+            <!-- ‘Returned’ for 1 and  ‘On Loan’ for 0-->
+            <th>{{loan[5]}} </th>
+             {% if loan[6] == 0 %}
+             <th>On Loan</th>
+             {% else %}
+             <th>Returned</th> 
+             {% endif %}
+             <th>{{loan[8]}} </th><th>{{loan[12]}} </th>
+        </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}

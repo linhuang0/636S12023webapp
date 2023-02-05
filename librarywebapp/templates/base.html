@@ -1,22 +1,51 @@
 <!DOCTYPE html>
+ <!--  Name:        LIN HUANG  -->
+ <!--  Student ID:  1154938  -->
 <html>
     <head>
         <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
         <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    </head>
-{% set testvar = 6 %}
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #04AA6D;
+  }
 
+  </style>    
+</head>
     <body>
-      {{ testvar }}
         <nav>
             <h1>Waikirikiri Library</h1>
             <ul>
-                <li><a href="{{ url_for('listbooks') }}">List Books</a></li>
-                <li><a href="{{ url_for('loanbook') }}">Loan Book</a></li>
-                <li><a href="{{ url_for('listborrowers') }}">List Borrowers</a></li>
-                <li><a href="{{ url_for('currentloans') }}">Current Loans</a></li>
+                <li><a id="listbooks" href="{{ url_for('listbooks') }}">List Books</a></li>
+                <li><a id="loanbook" href="{{ url_for('loanbook') }}">Loan Book</a></li>
+                <li><a id="listborrowers" href="{{ url_for('listborrowers') }}">List Borrowers</a></li>
+                <li><a id="currentloans" href="{{ url_for('currentloans') }}">Current Loans</a></li>
             </ul>
           </nav>
           <section class="content">
@@ -29,6 +58,12 @@
             {% block content %}{% endblock %}
           </section>
         <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     </body>
+    <script>
+      var url = window.location.href;
+      var menu=document.getElementById(url.substring(url.lastIndexOf("/") + 1, url.length));
+      if(menu)
+        menu.classList.add("active");
+    </script>
 </html>

@@ -1,12 +1,67 @@
 {% extends "base.html" %}
+{% block title %}
+Add Load
+{% endblock %}
 {% block content %}
-<!-- borrowers is the variable passed in listing borrowers -->
-<!-- books is the variable passed in listing available books -->
-<!-- loandate is the variable passed in containing the current date -->
-<!-- name for the borrower dropdown borrower should be  borrower -->
-<!-- name for the book dropdown should be book-->
-<!-- name for the hidden field with date should be loandate -->
-<!-- URL for submission (action) of form should be loan/add -->
+<!--  Name:        LIN HUANG  -->
+<!--  Student ID:  1154938  -->
+<!-- code to borrow a book-->
+<style>
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
 
+  div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
 
+  </style>
+  
+<br/>
+<h2>Borrow a book</h2>
+<div>
+    <form method ="POST" action="/loan/add">
+      <!-- borrowername dropdown for select -->
+      <label for="borrowername">Borrower Name</label>
+      <select id="borrower" name="borrower" required="required">
+            {% for borrower in borrowers %}
+                <option value="{{borrower[0]}}">{{borrower[1]}} {{borrower[2]}}</option>
+            {% endfor %}
+      </select>
+      <br/>
+      <!-- books dropdown for select -->
+      <label for="books">Books (Copy Id - Books Name - Type)</label>
+      <select id="book" name="book" required="required">
+        {% for book in books %}
+        <option value="{{book[0]}}">{{book[0]}} - {{book[4]}} - {{book[2]}}</option>
+        {% endfor %}
+      </select>
+      <!-- hidden loandate -->
+      <input type="hidden" id="loandate" name="loandate" value="{{loandate}}">
+      <input type="submit" value="Submit">
+    </form>
+</div>
 {% endblock %}
