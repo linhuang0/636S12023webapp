@@ -9,9 +9,17 @@ public route
 <br/>
 <h2>public route</h2>
 
-<div>
+<div class="input-group mb-3">
     <form method ="POST" action="/route/search">
-        <input id="search" name="search" >
+        <button type="button" class="btn btn-outline-secondary">All catalogue</button>
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" id="title" name="title">title</a></li>
+            <li><a class="dropdown-item" href="#" id="author" name="author">author</a></li>
+          </ul>
+        <input  id="search" type="text" class="form-control" aria-label="Text input with segmented dropdown button" name="search">
         <input type="submit" value="Submit">
     </form>
 </div>

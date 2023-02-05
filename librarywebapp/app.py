@@ -91,10 +91,26 @@ def staffrote():
    
 @app.route("/route/search", methods=["POST"])
 def publicsearch():
+    title=request.form.get('title')
+    author=request.form.get('author')
+    item =""
+    if title == None: 
+        item = "author"
+    else: item = "booktitle"
     searchterm=request.form.get('search')
     searchterm="%" + searchterm +"%"
     connection = getCursor()
-    connection.execute("SELECT * FROM books where booktitle LIKE %s;",(searchterm,))
+    sql= """ select br.borrowerid, br.firstname, br.familyname,  
+                l.borrowerid, l.bookcopyid, l.loandate, l.returned, b.bookid, b.booktitle, b.author, 
+                b.category, b.yearofpublication, bc.format 
+            from books b
+                inner join bookcopies bc on b.bookid = bc.bookid
+                    inner join loans l on bc.bookcopyid = l.bookcopyid
+                        inner join borrowers br on l.borrowerid = br.borrowerid
+            where %s LIKE %s
+            order by br.familyname, br.firstname, l.loandate;"""
+    searchitem=(item,searchterm)
+    connection.execute(sql,searchitem)
     bookList = connection.fetchall()
     return render_template("booklist.html", booklist = bookList)
 
