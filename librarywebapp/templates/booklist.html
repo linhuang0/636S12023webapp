@@ -10,21 +10,11 @@ Book Lists
 <h2>Book List</h2>
 
 <table class="table table-striped table-hover">
-   <tr><th>Book ID</th><th>Title</th><th>Author</th><th>Type</th><th>Year of Publication</th><th>Returned</th><th>loandate</th></tr>
+    <tr><th>Book ID</th><th>Title</th><th>Author</th><th>Type</th><th>Year of Publication</th><th>Description</th></tr>
     {% for book in booklist %}
         <tr>
             {% for entry in book %}
-                <th>{{entry[7]}}</th>
-                <th>{{entry[8]}}</th>
-                <th>{{entry[9]}}</th>
-                <th>{{entry[10]}}</th>
-                <th>{{entry[11]}}</th>
-                {% if entry[6] == 0 %}
-                <th>On Loan</th>
-                {% else %}
-                <th>Returned</th> 
-                {% endif %}
-                <th>{{entry[5]}}</th>
+                <td>{{entry}}</td>
             {% endfor %}
         </tr>
     {% endfor %}

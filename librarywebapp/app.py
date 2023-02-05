@@ -110,7 +110,7 @@ def publicsearch():
     searchitem=(selectedcatalogue,searchterm)
     connection.execute(sql,searchitem)
     bookList = connection.fetchall()
-    return render_template("booklist.html", booklist = bookList)
+    return render_template("searchresultbooklist.html", booklist = bookList)
 
 @app.route("/staff/search", methods=["POST"])
 def staffsearch():
