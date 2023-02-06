@@ -42,10 +42,12 @@
         <nav>
             <h1>Waikirikiri Library</h1>
             <ul>        
+                <li><a id="route" href="{{ url_for('publicroute') }}">Home</a></li>
                 <li><a id="listbooks" href="{{ url_for('listbooks') }}">List Books</a></li>
                 <li><a id="loanbook" href="{{ url_for('loanbook') }}">Loan Book</a></li>
                 <li><a id="listborrowers" href="{{ url_for('listborrowers') }}">List Borrowers</a></li>
                 <li><a id="currentloans" href="{{ url_for('currentloans') }}">Current Loans</a></li> 
+                <li><a id="staffroute" href="{{ url_for('staffroute') }}">Staff</a></li> 
             </ul>
           </nav>
           <section class="content">

@@ -30,9 +30,17 @@ def home():
 @app.route("/listbooks")
 def listbooks():
     connection = getCursor()
-    connection.execute("SELECT * FROM books;")
+    sql= """select br.borrowerid, br.firstname, br.familyname,  
+                l.borrowerid, l.bookcopyid, l.loandate, l.returned, b.bookid, b.booktitle, b.author, 
+                b.category, b.yearofpublication, bc.format 
+            from books b
+                inner join bookcopies bc on b.bookid = bc.bookid
+                    inner join loans l on bc.bookcopyid = l.bookcopyid
+                        inner join borrowers br on l.borrowerid = br.borrowerid
+            where l.returned = 1
+            order by br.familyname, br.firstname, l.loandate;"""        
+    connection.execute(sql)
     bookList = connection.fetchall()
-    print(bookList)
     return render_template("booklist.html", booklist = bookList)    
 
 @app.route("/loanbook")
@@ -86,17 +94,29 @@ def publicroute():
 
 # add staff access /route
 @app.route("/staff")
-def staffrote():
+def staffroute():
     return render_template("staffroute.html")
    
 @app.route("/route/search", methods=["POST"])
 def publicsearch():
+    todaydate = datetime.now().date()
     catalogue=request.form.get('catalogue')
+    selectedcatalogue ="All"
     if catalogue == "title": 
         selectedcatalogue = "b.booktitle" 
-    else: selectedcatalogue = "b.author"
+    elif catalogue == "author": 
+        selectedcatalogue = "b.author"
     searchterm=request.form.get('search')
-    searchterm="%" + searchterm + "%"
+    searchterm="%" +searchterm +"%"
+    allsql= """select br.borrowerid, br.firstname, br.familyname,  
+                l.borrowerid, l.bookcopyid, l.loandate, l.returned, b.bookid, b.booktitle, b.author, 
+                b.category, b.yearofpublication, bc.format 
+            from books b
+                inner join bookcopies bc on b.bookid = bc.bookid
+                    inner join loans l on bc.bookcopyid = l.bookcopyid
+                        inner join borrowers br on l.borrowerid = br.borrowerid
+            where %s LIKE %s or %s LIKE %s
+            order by br.familyname, br.firstname, l.loandate;"""
     sql= """select br.borrowerid, br.firstname, br.familyname,  
                 l.borrowerid, l.bookcopyid, l.loandate, l.returned, b.bookid, b.booktitle, b.author, 
                 b.category, b.yearofpublication, bc.format 
@@ -105,12 +125,15 @@ def publicsearch():
                     inner join loans l on bc.bookcopyid = l.bookcopyid
                         inner join borrowers br on l.borrowerid = br.borrowerid
             where %s LIKE %s
-            order by br.familyname, br.firstname, l.loandate;"""
+            order by br.familyname, br.firstname, l.loandate;"""        
+    allparameters=("b.booktitle",searchterm,"b.author",searchterm)
     parameters=(selectedcatalogue,searchterm)
     connection = getCursor()
-    connection.execute(sql,parameters)
+    if selectedcatalogue =="All":
+        connection.execute(allsql,allparameters)
+    else : connection.execute(sql,parameters)
     bookList = connection.fetchall()
-    return render_template("searchresultbooklist.html", booklist = bookList,sql=sql,searchitem=parameters)
+    return render_template("booklist.html", booklist = bookList,loandate = todaydate)
 
 @app.route("/staff/search", methods=["POST"])
 def staffsearch():

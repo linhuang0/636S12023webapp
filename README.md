@@ -2,6 +2,6 @@
 
 COMP636 Web App
 
-make a local modification
 
-change to show getting to pa
+TODO confirm search publicsearch result
+TODO searchresultbooklist.html: change to due day
