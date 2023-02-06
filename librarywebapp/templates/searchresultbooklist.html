@@ -9,6 +9,13 @@ Book Search result  Lists
 <br/>
 <h2>Book List</h2>
 
+{{sql}}
+
+-----
+{{searchitem}}
+=------
+{{booklist}}
+
 <table class="table table-striped table-hover">
    <tr><th>Book ID</th><th>Title</th><th>Author</th><th>Type</th><th>Year of Publication</th><th>Returned</th><th>loandate</th></tr>
     {% for book in booklist %}
@@ -26,7 +33,7 @@ Book Search result  Lists
                 <th>{{book[5]}}</th>
         </tr>
     {% endfor %}
-    <a class="btn btn-primary" href="{{ url_for('route') }}" role="button">Back</a>
+    <a class="btn btn-primary" href="{{ url_for('publicroute') }}" role="button">Back</a>
 </table>
 
 {% endblock %}

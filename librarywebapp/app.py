@@ -93,12 +93,11 @@ def staffrote():
 def publicsearch():
     catalogue=request.form.get('catalogue')
     if catalogue == "title": 
-        selectedcatalogue =   "b.booktitle" 
+        selectedcatalogue = "b.booktitle" 
     else: selectedcatalogue = "b.author"
     searchterm=request.form.get('search')
-    searchterm="%" + searchterm +"%"
-    connection = getCursor()
-    sql= """ select br.borrowerid, br.firstname, br.familyname,  
+    searchterm="%" + searchterm + "%"
+    sql= """select br.borrowerid, br.firstname, br.familyname,  
                 l.borrowerid, l.bookcopyid, l.loandate, l.returned, b.bookid, b.booktitle, b.author, 
                 b.category, b.yearofpublication, bc.format 
             from books b
@@ -107,10 +106,11 @@ def publicsearch():
                         inner join borrowers br on l.borrowerid = br.borrowerid
             where %s LIKE %s
             order by br.familyname, br.firstname, l.loandate;"""
-    searchitem=(selectedcatalogue,searchterm)
-    connection.execute(sql,searchitem)
+    parameters=(selectedcatalogue,searchterm)
+    connection = getCursor()
+    connection.execute(sql,parameters)
     bookList = connection.fetchall()
-    return render_template("searchresultbooklist.html", booklist = bookList)
+    return render_template("searchresultbooklist.html", booklist = bookList,sql=sql,searchitem=parameters)
 
 @app.route("/staff/search", methods=["POST"])
 def staffsearch():
