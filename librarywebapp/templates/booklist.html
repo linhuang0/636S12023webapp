@@ -9,27 +9,42 @@ Book Lists
 <br/>
 <h2>Book List</h2>
 <div>
-<table class="table table-striped table-hover">
-    <tr><th>Book ID</th><th>Title</th><th>Author</th><th>Category</th><th>Year of Publication</th><th>Returned</th><th>Due day</th></tr>
-     {% for book in booklist %}
-         <tr>
-                 <th>{{book[7]}}</th>
-                 <th>{{book[8]}}</th>
-                 <th>{{book[9]}}</th>
-                 <th>{{book[10]}}</th>
-                 <th>{{book[11]}}</th>
-                 {% if book[6] == 0 %}
-                 <th>On Loan</th>
-                 {% else %}
-                 <th>Available</th> 
-                 {% endif %}
-                <!--TODO change to due day -->
-                 <th>{{book[5]}}</th>
-         </tr>
-     {% endfor %}
- </table>
+    <table class="table table-striped table-hover">
+        <tr><th>Book ID</th><th>Title</th><th>Author</th><th>Category</th><th>Year of Publication</th><th>Returned</th><th>Loan day</th><th>Due day</th></tr>
+         {% for book in booklist %}
+             <tr>
+                     <th>{{book[7]}}</th>
+                     <th>{{book[8]}}</th>
+                     <th>{{book[9]}}</th>
+                     <th>{{book[10]}}</th>
+                     <th>{{book[11]}}</th>
+                     {% if book[6] == 0 %}
+                     <th>On Loan</th>
+                     <th>{{book[5]}}</th>
+                     <th class="text-center">
+                         <span class="due-date"> {{book[5]}}</span>
+                     </th>
+                     {% else %}
+                     <th>Available</th> 
+                     {% endif %}
 
- <a class="btn btn-primary" href="{{ url_for('home') }}" role="button"> Back Home </a>
-</div>
+                      
+             </tr>
+         {% endfor %}
+     </table>
+    
+     <a class="btn btn-primary" href="{{ url_for('home') }}" role="button"> Back Home </a>
+    </div>
+    <script>
+        const dueDateElements = document.getElementsByClassName("due-date");
+        for (let i = 0; i < dueDateElements.length; i++) {
+            const dueDateElement = dueDateElements[i];
+            const dueDate = new Date(dueDateElement.innerHTML);
+            const extendedDueDate = new Date(dueDate.getTime() + 28 * 24 * 60 * 60 * 1000);
+          
+            dueDateElement.innerHTML = extendedDueDate.toLocaleDateString();
+        }
+      </script>
+    
 
 {% endblock %}

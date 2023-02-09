@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}
+Overdue books report 
+{% endblock %}
+{% block content %}
+<!--  Name:        LIN HUANG  -->
+<!--  Student ID:  1154938  -->
+<!-- code to display Overdue books report  -->
+<br/>
+<h2>Overdue books report </h2>
+
+<div>
+    <table class="table table-striped table-hover">
+        <tr><th>Borrower ID</th><th>Borrower Name</th><th>Book ID</th><th>Title</th><th>Author</th><th>Category</th><th>Year of Publication</th><th>Returned</th><th>Loan day</th><th>Overdue 35 days</th></tr>
+        {% set currentborrower = namespace(id=0) %} 
+        {% for book in overduelist %}
+             <tr>
+                     <th>{{book[0]}}</th>
+                     {% if (currentborrower.id != book[0])  %}
+                     <th>{{book[2]}}  {{book[1]}}</th>
+                     {% set currentborrower.id = book[0] %}
+                   {% else %} 
+                     <th></th>
+                   {% endif %}
+                     <th>{{book[7]}}</th>
+                     <th>{{book[8]}}</th>
+                     <th>{{book[9]}}</th>
+                     <th>{{book[10]}}</th>
+                     <th>{{book[11]}}</th>
+                     {% if book[6] == 0 %}
+                     <th>On Loan</th>
+                     <th>{{book[5]}}</th>
+                     <th class="text-center">
+                         <span class="due-date"> {{book[5]}}</span>
+                     </th>
+                     {% else %}
+                     <th>Available</th> 
+                     {% endif %}
+
+                      
+             </tr>
+         {% endfor %}
+     </table>
+    
+     <a class="btn btn-primary" href="{{ url_for('home') }}" role="button"> Back Home </a>
+    </div>
+
+        <script>
+        const dueDateElements = document.getElementsByClassName("due-date");
+        for (let i = 0; i < dueDateElements.length; i++) {
+            const dueDateElement = dueDateElements[i];
+            const dueDate = new Date(dueDateElement.innerHTML);
+            const extendedDueDate = new Date(dueDate.getTime() + 35 * 24 * 60 * 60 * 1000);
+          
+            dueDateElement.innerHTML = extendedDueDate.toLocaleDateString();
+
+            if (new Date() >= extendedDueDate) {
+                const parentRow = dueDateElement.parentElement.parentElement;
+                parentRow.style.display = "table-row";
+            } else {
+                const parentRow = dueDateElement.parentElement.parentElement;
+                parentRow.style.display = "none";
+            }
+        }
+        </script>
+{% endblock %}

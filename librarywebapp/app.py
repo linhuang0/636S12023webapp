@@ -231,9 +231,21 @@ def returnbook():
     connection.execute(sql,(loanid,))
     return redirect("/currentloans")
 
-@app.route("/staff/listoverduebooks")
+@app.route("/overduebookslist")
 def listoverduebooks():
-    return redirect("/staff/listoverduebooks.html")
+    connection = getCursor()
+    sql= """select br.borrowerid, br.firstname, br.familyname,  
+                l.borrowerid, l.bookcopyid, l.loandate, l.returned, b.bookid, b.booktitle, b.author, 
+                b.category, b.yearofpublication, bc.format 
+            from books b
+                inner join bookcopies bc on b.bookid = bc.bookid
+                    inner join loans l on bc.bookcopyid = l.bookcopyid
+                        inner join borrowers br on l.borrowerid = br.borrowerid
+            where l.returned = 0
+            order by br.familyname, br.firstname, l.loandate;"""        
+    connection.execute(sql)
+    overduelist = connection.fetchall()
+    return render_template("overduebookslist.html", overduelist = overduelist)  
 
 @app.route("/staff/listloansumary")
 def listloansumary():
