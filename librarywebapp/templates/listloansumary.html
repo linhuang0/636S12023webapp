@@ -5,8 +5,22 @@ Borrower List
 {% block content %}
 <!--  Name:        LIN HUANG  -->
 <!--  Student ID:  1154938  -->
-<!-- code to display -->
+<!-- code to display Loan Summary-->
 <br/>
-<h2>staff route</h2>
+<h2>Loan Summary Report</h2>
 
+<div>
+    <table class="table table-striped table-hover">
+        <tr><th>Book ID</th><th>Title</th><th>Number Of Times</th></tr>
+         {% for book in loanlist %}
+             <tr>
+                     <th>{{book[0]}}</th>
+                     <th>{{book[1]}}</th>
+                     <th>{{book[2]}}</th>                      
+             </tr>
+         {% endfor %}
+     </table>
+    
+     <a class="btn btn-primary" href="{{ url_for('home') }}" role="button"> Back Home </a>
+    </div>
 {% endblock %}

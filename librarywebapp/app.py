@@ -247,12 +247,26 @@ def listoverduebooks():
     overduelist = connection.fetchall()
     return render_template("overduebookslist.html", overduelist = overduelist)  
 
-@app.route("/staff/listloansumary")
+@app.route("/listloansumary")
 def listloansumary():
-    return redirect("/staff/listloansumary.html")
+    connection = getCursor()
+    sql = "select b.bookid,b.booktitle,count(*)as loanedtimes from books b, bookcopies bc, loans l where b.bookid=bc.bookid and bc.bookcopyid=l.bookcopyid group by b.bookid ORDER BY loanedtimes DESC;"
+    connection.execute(sql)
+    loanlist = connection.fetchall()
+    return render_template("listloansumary.html",loanlist=loanlist)
 
-@app.route("/staff/listborrowersummay")
+@app.route("/listborrowersummay")
 def listborrowersummay():
-    return redirect("/staffroute/listborrowersummay.html")
+    connection = getCursor()
+    sql = """select br.borrowerid, br.firstname, br.familyname,  
+                count(*)as borrowtimes 
+            from books b
+                inner join bookcopies bc on b.bookid = bc.bookid
+                    inner join loans l on bc.bookcopyid = l.bookcopyid
+                        inner join borrowers br on l.borrowerid = br.borrowerid
+            group by br.borrowerid;"""
+    connection.execute(sql)
+    borrowerlist = connection.fetchall()
+    return render_template("listborrowersummay.html",borrowerlist=borrowerlist)
 
 
