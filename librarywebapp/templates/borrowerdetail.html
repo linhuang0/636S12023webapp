@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}
+Borrower List
+{% endblock %}
+{% block content %}
+<!--  Name:        LIN HUANG  -->
+<!--  Student ID:  1154938  -->
+<!-- code to display a list of borrowers -->
+
+<br/>
+<h2>borrower detail </h2>
+
+{% for item in borrowerlist %}
+<form method="POST" action="/updateborrower" id="borrowerinfo">
+    <fieldset id="borrowerinfo" name="borrowerinfo">
+        <div class="mb-3">
+            Borrower ID: 
+            <input name="borrowerid" id="borrowerid" type="text" class="form-control" value={{item[0]}} readonly>
+        </div>
+        <div class="mb-3">
+            First Name:
+            <input name="first_name" id="first_name" type="text" class="form-control" value={{item[1]}}>
+        </div>
+        <div class="mb-3">
+            Family Name:
+            <input name="last_name" id="last_name" type="text" class="form-control" value={{item[2]}}>
+        </div>
+        <div class="mb-3">
+            Date of birth:
+            <input name="dob" id="dob" type="text" class="form-control" value={{item[3]}}>
+        </div>
+        <div class="mb-3">
+            House Number Name:
+            <input name="house_number" id="house_number" type="text" class="form-control" value={{item[4]}}>
+        </div>
+        <div class="mb-3">
+            Street: 
+            <input name="street" id="street" type="text" class="form-control" value={{item[5]}}>
+        </div>
+        <div class="mb-3">
+            Town: 
+            <input name="town" id="town" type="text" class="form-control" value={{item[6]}}>
+        </div>
+        <div class="mb-3"> 
+            City: 
+            <input name="city" id="city" type="text" class="form-control" value={{item[7]}}>
+        </div>
+        <div class="mb-3">     
+        <div class="mb-3"> 
+            Postal code: 
+            <input name="postal_code" id="postal_code" type="text" class="form-control" value={{item[8]}} pattern="\d{4}" maxlength="4" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+        </div>
+                
+    </fieldset>
+    <a class="btn btn-primary" href="/listborrowers" role="button"> Back </a>
+    <input class="btn btn-primary" type="submit" value="Save">
+</form>
+{% endfor %}
+{% if updatestatus %}
+<div>{{ updatestatus }}</div>
+{% endif %}
+
+{% endblock %}

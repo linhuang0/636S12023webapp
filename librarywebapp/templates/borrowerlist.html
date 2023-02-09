@@ -10,12 +10,20 @@ Borrower List
 <h2>Borrower List</h2>
 
 <table class="table table-striped table-hover">
-    <tr><th>Borrower ID</th><th>First Name</th><th>Family Name</th><th>Date of birth</th><th>House Number Name</th><th>Street</th><th>Town</th><th>City</th><th>Postal Code</th></tr>
+    <tr><th>Borrower ID</th><th>First Name</th><th>Family Name</th><th>Date of birth</th><th>House Number Name</th><th>Street</th><th>Town</th><th>City</th><th>Postal Code</th><th>Operation</th></tr>
     {% for borrower in borrowerlist %}
     <tr>{% for item in borrower %}
         <td>{{item}}</td>
         {% endfor %}
+        <td> 
+            <a class="btn btn-primary" href="/borrowerdetail?borrowerid={{borrower[0]}}" role="button"> Edit  </a>
+            <a class="btn btn-primary" href="/loanbook?borrowerid={{borrower[0]}}" role="button"> Issue </a>
+
+        </td>
+    
     </tr>
     {% endfor %}
-    </table>
+</table>
+
+<a class="btn btn-primary" href="/addborrower" role="button">Add a new Borrower</a>
 {% endblock %}

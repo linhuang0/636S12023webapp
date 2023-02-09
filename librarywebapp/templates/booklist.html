@@ -10,7 +10,7 @@ Book Lists
 <h2>Book List</h2>
 <div>
 <table class="table table-striped table-hover">
-    <tr><th>Book ID</th><th>Title</th><th>Author</th><th>Category</th><th>Year of Publication</th><th>Returned</th><th>loandate</th></tr>
+    <tr><th>Book ID</th><th>Title</th><th>Author</th><th>Category</th><th>Year of Publication</th><th>Returned</th><th>Due day</th></tr>
      {% for book in booklist %}
          <tr>
                  <th>{{book[7]}}</th>
@@ -29,7 +29,7 @@ Book Lists
      {% endfor %}
  </table>
 
- <a class="btn btn-primary" href="{{ url_for('publicroute') }}" role="button"> Search books </a>
+ <a class="btn btn-primary" href="{{ url_for('home') }}" role="button"> Back Home </a>
 </div>
 
 {% endblock %}

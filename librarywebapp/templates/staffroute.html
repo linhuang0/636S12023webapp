@@ -7,6 +7,36 @@ staff route
 <!--  Student ID:  1154938  -->
 <!-- code to display staff route -->
 <br/>
-<h2>staff route</h2>
+<!--search books  -->
+<h2>Staff search books</h2>
 
+<form method ="POST" action="/searchbooks">
+    <div class="input-group mb-3"></div>
+        <select name="catalogue" id="catalogue" required="required"  class="btn btn-secondary dropdown-toggle" aria-label=".form-select-lg example">
+            <option selected>All</option>
+            <option >Title</option>
+            <option>Author</option>
+         </select>
+        <input  id="search" type="text" class="form-control" ria-describedby="Text input with dropdown button" name="search" placeholder="Search books">
+    </div>
+    <div class="d-grid gap-2 d-md-block"> 
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>    
+</form>
+</br>
+<!-- book management-->
+<h2 style="outline: none;" tabindex="0"><span>Borrower Management</span></h2>
+    <!--list borrowers -->
+    <div class="d-grid gap-2 d-md-block">
+        <a class="btn btn-primary" href="{{ url_for('listborrowers') }}" role="button"> View all borrowers </a>
+    </div>
+    <!--search borrowers -->
+    <form method ="POST" action="/searchborrower">
+     <div class="input-group mb-3"></div>
+        <input  id="search" type="text" class="form-control" ria-describedby="Text input with dropdown button" name="search" placeholder="Search borrowers by name or by library card id (borrower id) ">
+     </div>
+     <div class="d-grid gap-2 d-md-block"> 
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>    
+    </form>
 {% endblock %}

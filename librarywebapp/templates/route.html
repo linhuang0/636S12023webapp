@@ -6,17 +6,20 @@ public route
 <!--  Name:        LIN HUANG  -->
 <!--  Student ID:  1154938  -->
 <!-- code to display public route -->
+<body>
 <br/>
-<h2>public route</h2>
-<form method ="POST" action="/route/search">
+<h2>Public </h2>
+<form method ="POST" action="/searchbooks">
     <div class="input-group mb-3"></div>
-        <select name="catalogue" id="catalogue" required="required"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <select name="catalogue" id="catalogue" required="required"  class="btn btn-secondary dropdown-toggle" aria-label=".form-select-lg example">
             <option selected>All</option>
             <option >Title</option>
             <option>Author</option>
          </select>
-        <input  id="search" type="text" class="form-control" aria-label="Text input with dropdown button" name="search" placeholder="Search books">
-        <input class="btn btn-primary" type="submit" value="Submit">
+        <input  id="search" type="text" class="form-control" ria-describedby="Text input with dropdown button" name="search" placeholder="Search books">
     </div>
+    <div class="col-12"> <button type="submit" class="btn btn-primary">Submit</button></div>    
 </form>
+
+</body>
 {% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}
+Borrower List
+{% endblock %}
+{% block content %}
+<!--  Name:        LIN HUANG  -->
+<!--  Student ID:  1154938  -->
+<!-- code to display add a borrower -->
+
+<br/>
+<h2 class="text-center mb-4">Add Borrower</h2>
+<form method="post" action="/addborrower" >
+    <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" class="form-control" id="first_name" name="first_name" required>
+    </div>
+    <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" class="form-control" id="last_name" name="last_name" required>
+    </div>
+    <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" class="form-control" id="dob" name="dob" required>
+    </div>
+    <div class="form-group">
+        <label for="house_number">House Number:</label>
+        <input type="text" class="form-control" id="house_number" name="house_number" required>
+    </div>
+    <div class="form-group">
+        <label for="street">Street:</label>
+        <input type="text" class="form-control" id="street" name="street" required>
+    </div>
+    <div class="form-group">
+        <label for="town">Town:</label>
+        <input type="text" class="form-control" id="town" name="town" required>
+    </div>
+    <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" class="form-control" id="city" name="city" required>
+    </div>
+    <div class="form-group">
+        <label for="postal_code">Postal Code:</label>
+        <input type="text" class="form-control" id="postal_code" name="postal_code" maxlength="4" pattern="\d*" placeholder="Digit Only"required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary d-block mx-auto">Add Borrower</button>
+</form>
+
+{% endblock %}
