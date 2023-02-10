@@ -8,7 +8,7 @@ Current Loads
 <!--code to display list of loans -->
 <br/>
 <h2>Current Loans</h2>
-
+<form method ="POST" action="/returnbook">
 <table class="table table-striped table-hover">
     <tr><th>Borrower Name</th><th>Loan Date</th><th>Status </th><th>Book Title</th><th>Type</th><th>Opration</th></tr>
     {% set currentborrower = namespace(id=0) %}
@@ -36,11 +36,16 @@ Current Loads
              <th>Returned</th> 
              {% endif %}
              <th>{{loan[8]}} </th><th>{{loan[12]}} </th>
-             <th>
-                <a class="btn btn-primary" href="/returnbook?loanid={{loan[13]}}" role="button"> Return </a>
-             </th>    
+             <th> 
+                {% if loan[6] == 0 %}
+                <input type="hidden" id="loanid" name="loanid" value="{{loan[13]}}">
+                <input class="btn btn-primary" type="submit" value="Return">
+                {% else %}
+                {% endif %}
+            </th>    
         </tr>
     {% endfor %}
+</form>
 </table>
 
 {% endblock %}

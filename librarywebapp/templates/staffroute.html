@@ -31,7 +31,7 @@ staff route
         <a class="btn btn-primary" href="{{ url_for('listborrowers') }}" role="button"> View all borrowers </a>
     </div>
     <!--search borrowers -->
-    <form method ="POST" action="/searchborrower">
+    <form method ="GET" action="/searchborrower">
      <div class="input-group mb-3"></div>
         <input  id="search" type="text" class="form-control" ria-describedby="Text input with dropdown button" name="search" placeholder="Search borrowers by name or by library card id (borrower id) ">
      </div>
