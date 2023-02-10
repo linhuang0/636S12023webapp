@@ -9,7 +9,7 @@ Add Load
 
 <br />
 
-<h2>Borrow a Book</h2>
+<h2 class="text-center mb-4">Borrow a Book</h2>
 
 <div class="container mt-5">
   <form method="POST" action="/loan/add">
@@ -30,8 +30,11 @@ Add Load
         {% endfor %}
       </select>
     </div>
+  </br>
+  <div class="text-center">
     <input type="hidden" id="loandate" name="loandate" value="{{loandate}}">
     <input type="submit" class="btn btn-primary" value="Submit">
+    </div>
   </form>
 </div>
 {% endblock %}

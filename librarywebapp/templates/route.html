@@ -8,7 +8,7 @@ public route
 <!-- code to display public route -->
 <body>
 <br/>
-<h2>Public </h2>
+<h2 class="text-center mb-4">Public </h2>
 <form method="GET" action="/searchbooks" class="form-inline">
     <div class="input-group mb-3">
       <select name="catalogue" id="catalogue" required="required" class="form-control form-control-lg">
@@ -17,8 +17,9 @@ public route
         <option>Author</option>
       </select>
       <input id="search" type="text" class="form-control form-control-lg" aria-describedby="Text input with dropdown button" name="search" placeholder="Search books">
+      <button type="submit" class="btn btn-primary">Search</button>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    
   </form>
   
 </body>

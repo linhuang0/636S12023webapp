@@ -7,7 +7,7 @@ Book Lists
 <!--  Student ID:  1154938  -->
 <!-- code to display a list of books-->
 <br/>
-<h2>Book List</h2>
+<h2 class="text-center mb-4">Book List</h2>
 <div>
     <table class="table table-striped table-hover">
         <tr><th>Book ID</th><th>Copy ID</th><th>Title</th><th>Author</th><th>Category</th><th>Year of Publication</th><th>Returned</th><th>Loan day</th><th>Due day</th></tr>
@@ -21,7 +21,7 @@ Book Lists
                      <th>{{book[11]}}</th>
                      {% if book[6] == 0 %}
                      <th>On Loan</th>
-                     <th>{{book[5]}}</th>
+                     <th >{{book[5]}}</th>
                      <th class="text-center">
                          <span class="due-date"> {{book[5]}}</span>
                      </th>
@@ -35,17 +35,18 @@ Book Lists
      </table>
     
      <a class="btn btn-primary" href="{{ url_for('home') }}" role="button"> Back Home </a>
-    </div>
-    <script>
-        const dueDateElements = document.getElementsByClassName("due-date");
-        for (let i = 0; i < dueDateElements.length; i++) {
-            const dueDateElement = dueDateElements[i];
-            const dueDate = new Date(dueDateElement.innerHTML);
-            const extendedDueDate = new Date(dueDate.getTime() + 28 * 24 * 60 * 60 * 1000);
-          
-            dueDateElement.innerHTML = extendedDueDate.toLocaleDateString();
-        }
-      </script>
+</div>
+<script>
+    const dueDateElements = document.getElementsByClassName("due-date");
+    for (let i = 0; i < dueDateElements.length; i++) {
+        const dueDateElement = dueDateElements[i];
+        const dueDate = new Date(dueDateElement.innerHTML);
+        const extendedDueDate = new Date(dueDate.getTime() + 28 * 24 * 60 * 60 * 1000);
+
+        dueDateElement.innerHTML = `<span >${extendedDueDate.toLocaleDateString()}</span>`;
+    }
+</script>
+
     
 
 {% endblock %}

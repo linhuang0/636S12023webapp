@@ -17,32 +17,35 @@ staff route
         <option>Author</option>
       </select>
       <input id="search" type="text" class="form-control form-control-lg" aria-describedby="Text input with dropdown button" name="search" placeholder="Search books">
+      <button type="submit" class="btn btn-primary">Search</button>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    
   </form>
   
   <!-- Borrower Management -->
   <h2 class="text-center my-3">Borrower Management</h2>
-  
-  <!-- View all borrowers -->
-  <div class="text-center">
-    <a class="btn btn-primary" href="{{ url_for('listborrowers') }}" role="button">View all borrowers</a>
-  </div>
-  
   <!-- Search borrowers -->
   <form method="GET" action="/searchborrower" class="form-inline my-3">
     <div class="input-group mb-3">
       <input id="search" type="text" class="form-control form-control-lg" aria-describedby="Text input with dropdown button" name="search" placeholder="Search borrowers by name or by library card id (borrower id)">
+      <button type="submit" class="btn btn-primary">Search</button>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    
+    <!-- View all borrowers -->
+    <div class="text-center">
+      <a href="{{ url_for('listborrowers') }}" class="link-primary">View all borrowers</a>
+    </div>
+    
   </form>
   
  <!-- Reports -->
  <h2 class="text-center my-3">Reports</h2>
-
+ <div class="text-center">
     <a href="{{ url_for('listoverduebooks') }}" class="link-primary">Overdue Books Summary Report</a>
     </br>
     <a href="{{ url_for('listloansumary') }}" class="link-primary">Loan Summary Report</a>
     </br>
     <a href="{{ url_for('listborrowersummay') }}" class="link-primary">Borrower Summary Report</a>
-{% endblock %}
+ </div>
+
+    {% endblock %}
