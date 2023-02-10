@@ -56,8 +56,11 @@ Borrower List
     <input class="btn btn-primary" type="submit" value="Save">
 </form>
 {% endfor %}
+
 {% if updatestatus %}
-<div>{{ updatestatus }}</div>
+<div class="alert alert-danger" role="alert"> {{ updatestatus }}</div>
 {% endif %}
+
+
 
 {% endblock %}

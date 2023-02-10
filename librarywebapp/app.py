@@ -41,6 +41,10 @@ def publicroute():
 def staffroute():
     return render_template("staffroute.html")
 
+@app.route("/error")
+def error():
+    return render_template("error.html")
+
 #  Books function 
 @app.route("/listbooks")
 def listbooks():
@@ -134,18 +138,35 @@ def currentloans():
 @app.route("/loan/add", methods=["POST"])
 def addloan():
     borrowerid = request.form.get('borrower')
-    bookid = request.form.get('book')
+    bookcopyid = request.form.get('book')
     loandate = request.form.get('loandate')
     cur = getCursor()
-    cur.execute("INSERT INTO loans (borrowerid, bookcopyid, loandate, returned) VALUES(%s,%s,%s,0);",(borrowerid, bookid, str(loandate),))
-    return redirect("/currentloans")
+    #Check again before issue
+    sql = """SELECT * FROM bookcopies
+        inner join books on books.bookid = bookcopies.bookid
+        WHERE bookcopyid in (SELECT bookcopyid from loans where returned <> 1 or returned is NULL)
+        AND (bookcopies.format != 'ebook' AND bookcopies.format != 'Audio Book') and bookcopyid =%s;"""
+    cur.execute(sql,(bookcopyid,))
+    loanList = cur.fetchall()
+    updatestatus = session.get('updatestatus', None)
+    if cur.rowcount == 0:
+        cur.execute("INSERT INTO loans (borrowerid, bookcopyid, loandate, returned) VALUES(%s,%s,%s,0);",(borrowerid, bookcopyid, str(loandate),))
+        return redirect("/currentloans")
+    else:
+         # return an error message or redirect the user to a different page
+        updatestatus = "This book alread on loan, please choose another one"
+        session['updatestatus'] = updatestatus
+        return render_template("/error.html",updatestatus=updatestatus,loanList=loanList)
+   
 
 @app.route("/returnbook", methods=["POST"])
 def returnbook():
     loanid = request.form.get('loanid', None)
     if loanid is None:
         # return an error message or redirect the user to a different page
-        return redirect("/error")
+        updatestatus = "Could not get the loan id, pls try again later"
+        session['updatestatus'] = updatestatus
+        return render_template("/error.html",updatestatus=updatestatus)
     connection = getCursor()
     sql= "UPDATE loans set returned ='1' where loanid =%s;"
     connection.execute(sql,(loanid,))
@@ -157,6 +178,7 @@ def listborrowers():
     connection = getCursor()
     connection.execute("SELECT * FROM borrowers;")
     borrowerList = connection.fetchall()
+    session['updatestatus'] = None
     return render_template("borrowerlist.html", borrowerlist = borrowerList)
 
 @app.route("/searchborrower", methods=["GET"])
@@ -181,8 +203,13 @@ def borrowerdetail():
     # code to retrieve borrower details and render the template
     return render_template("borrowerdetail.html",borrowerlist=borrowerList,borrowerid=borrowerid, updatestatus=updatestatus)
 
-@app.route("/addborrower", methods=["POST"])
+@app.route("/addborrower", methods=["GET", "POST"])
 def addborrower():
+    if request.method == "GET":
+        # Code to display the add borrower form
+        return render_template("addborrower.html")
+    else:
+        # Code to handle the POST request and insert the borrower information into the database
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
         dob = request.form.get("dob")

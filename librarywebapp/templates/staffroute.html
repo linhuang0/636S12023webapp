@@ -37,4 +37,12 @@ staff route
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
   
+ <!-- Reports -->
+ <h2 class="text-center my-3">Reports</h2>
+
+    <a href="{{ url_for('listoverduebooks') }}" class="link-primary">Overdue Books Summary Report</a>
+    </br>
+    <a href="{{ url_for('listloansumary') }}" class="link-primary">Loan Summary Report</a>
+    </br>
+    <a href="{{ url_for('listborrowersummay') }}" class="link-primary">Borrower Summary Report</a>
 {% endblock %}

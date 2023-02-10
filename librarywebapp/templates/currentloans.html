@@ -10,7 +10,7 @@ Current Loads
 <h2>Current Loans</h2>
 <form method ="POST" action="/returnbook">
 <table class="table table-striped table-hover">
-    <tr><th>Borrower Name</th><th>Loan Date</th><th>Status </th><th>Book Title</th><th>Type</th><th>Opration</th></tr>
+    <tr><th>Borrower Name</th><th>Loan Date</th><th>Status </th><th>Book Copy ID</th><th>Book Title</th><th>Type</th><th>Opration</th></tr>
     {% set currentborrower = namespace(id=0) %}
     {% for loan in loanlist %}
         {% if loan[12] == "eBook" %}
@@ -35,6 +35,7 @@ Current Loads
              {% else %}
              <th>Returned</th> 
              {% endif %}
+             <th> {{loan[4]}}</th>
              <th>{{loan[8]}} </th><th>{{loan[12]}} </th>
              <th> 
                 {% if loan[6] == 0 %}
