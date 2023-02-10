@@ -62,15 +62,15 @@ def listbooks():
 @app.route("/searchbooks", methods=["GET"])
 def searchbooks():
     todaydate = datetime.now().date()
-    catalogue=request.args.get('catalogue')
-    selectedcatalogue ="All"
+    catalogue = request.args.get('catalogue')
+    selected_catalogue = "All"
     if catalogue == "title": 
-        selectedcatalogue = "b.booktitle" 
+        selected_catalogue = "b.booktitle" 
     elif catalogue == "author": 
-        selectedcatalogue = "b.author"
-    searchterm=request.args.get('search')
-    searchterm="%" +searchterm +"%"
-    allsql= """select br.borrowerid, br.firstname, br.familyname,  
+        selected_catalogue = "b.author"
+    search_term = request.args.get('search')
+    search_term = "%" + search_term + "%"
+    all_sql = """select br.borrowerid, br.firstname, br.familyname,  
                 l.borrowerid, l.bookcopyid, l.loandate, l.returned, b.bookid, b.booktitle, b.author, 
                 b.category, b.yearofpublication, bc.format 
             from books b
@@ -79,7 +79,7 @@ def searchbooks():
                         inner join borrowers br on l.borrowerid = br.borrowerid
             where %s LIKE %s or %s LIKE %s
             order by br.familyname, br.firstname, l.loandate;"""
-    sql= """select br.borrowerid, br.firstname, br.familyname,  
+    sql = """select br.borrowerid, br.firstname, br.familyname,  
                 l.borrowerid, l.bookcopyid, l.loandate, l.returned, b.bookid, b.booktitle, b.author, 
                 b.category, b.yearofpublication, bc.format 
             from books b
@@ -88,15 +88,16 @@ def searchbooks():
                         inner join borrowers br on l.borrowerid = br.borrowerid
             where %s LIKE %s
             order by br.familyname, br.firstname, l.loandate;"""        
-    allparameters=("b.booktitle",searchterm,"b.author",searchterm)
-    parameters=(selectedcatalogue,searchterm)
+    all_parameters = ("b.booktitle", search_term, "b.author", search_term)
+    parameters = (selected_catalogue, search_term)
     connection = getCursor()
-    if selectedcatalogue =="All":
-        connection.execute(allsql,allparameters)
-    else : connection.execute(sql,parameters)
-    bookList = connection.fetchall()
-    return render_template("booklist.html", booklist = bookList,loandate = todaydate)
-    
+    if selected_catalogue == "All":
+        connection.execute(all_sql, all_parameters)
+    else: 
+        connection.execute(sql, parameters)
+    book_list = connection.fetchall()
+    return render_template("booklist.html", booklist=book_list, loandate=todaydate)
+
 @app.route("/loanbook", methods=["GET"])
 def loanbook():
     todaydate = datetime.now().date()

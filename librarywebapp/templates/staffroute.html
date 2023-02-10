@@ -8,35 +8,33 @@ staff route
 <!-- code to display staff route -->
 <br/>
 <!--search books  -->
-<h2>Staff search books</h2>
-
-<form method ="POST" action="/searchbooks">
-    <div class="input-group mb-3"></div>
-        <select name="catalogue" id="catalogue" required="required"  class="btn btn-secondary dropdown-toggle" aria-label=".form-select-lg example">
-            <option selected>All</option>
-            <option >Title</option>
-            <option>Author</option>
-         </select>
-        <input  id="search" type="text" class="form-control" ria-describedby="Text input with dropdown button" name="search" placeholder="Search books">
+<h2 class="text-center my-3" > Search Books</h2> 
+<form method="GET" action="/searchbooks" class="form-inline">
+    <div class="input-group mb-3">
+      <select name="catalogue" id="catalogue" required="required" class="form-control form-control-lg">
+        <option selected>All</option>
+        <option>Title</option>
+        <option>Author</option>
+      </select>
+      <input id="search" type="text" class="form-control form-control-lg" aria-describedby="Text input with dropdown button" name="search" placeholder="Search books">
     </div>
-    <div class="d-grid gap-2 d-md-block"> 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>    
-</form>
-</br>
-<!-- book management-->
-<h2 style="outline: none;" tabindex="0"><span>Borrower Management</span></h2>
-    <!--list borrowers -->
-    <div class="d-grid gap-2 d-md-block">
-        <a class="btn btn-primary" href="{{ url_for('listborrowers') }}" role="button"> View all borrowers </a>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+  <!-- Borrower Management -->
+  <h2 class="text-center my-3">Borrower Management</h2>
+  
+  <!-- View all borrowers -->
+  <div class="text-center">
+    <a class="btn btn-primary" href="{{ url_for('listborrowers') }}" role="button">View all borrowers</a>
+  </div>
+  
+  <!-- Search borrowers -->
+  <form method="GET" action="/searchborrower" class="form-inline my-3">
+    <div class="input-group mb-3">
+      <input id="search" type="text" class="form-control form-control-lg" aria-describedby="Text input with dropdown button" name="search" placeholder="Search borrowers by name or by library card id (borrower id)">
     </div>
-    <!--search borrowers -->
-    <form method ="GET" action="/searchborrower">
-     <div class="input-group mb-3"></div>
-        <input  id="search" type="text" class="form-control" ria-describedby="Text input with dropdown button" name="search" placeholder="Search borrowers by name or by library card id (borrower id) ">
-     </div>
-     <div class="d-grid gap-2 d-md-block"> 
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>    
-    </form>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
 {% endblock %}

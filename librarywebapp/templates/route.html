@@ -9,17 +9,17 @@ public route
 <body>
 <br/>
 <h2>Public </h2>
-<form method ="GET" action="/searchbooks">
-    <div class="input-group mb-3"></div>
-        <select name="catalogue" id="catalogue" required="required"  class="btn btn-secondary dropdown-toggle" aria-label=".form-select-lg example">
-            <option selected>All</option>
-            <option >Title</option>
-            <option>Author</option>
-         </select>
-        <input  id="search" type="text" class="form-control" ria-describedby="Text input with dropdown button" name="search" placeholder="Search books">
+<form method="GET" action="/searchbooks" class="form-inline">
+    <div class="input-group mb-3">
+      <select name="catalogue" id="catalogue" required="required" class="form-control form-control-lg">
+        <option selected>All</option>
+        <option>Title</option>
+        <option>Author</option>
+      </select>
+      <input id="search" type="text" class="form-control form-control-lg" aria-describedby="Text input with dropdown button" name="search" placeholder="Search books">
     </div>
-    <div class="col-12"> <button type="submit" class="btn btn-primary">Submit</button></div>    
-</form>
-
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
 </body>
 {% endblock %}

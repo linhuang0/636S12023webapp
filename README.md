@@ -84,6 +84,5 @@ library.libararyid   --  borrowers.libararyid
 If we want to increase the location of the book, we could add libararyid in the bookcopies table. When borrowing a book, update this field to the libararyid of the library where the borrower is located. When returning the book, you need to update this field to the returned libararyid.
 
 
-### other
-TODO confirm search publicsearch result
+
 
